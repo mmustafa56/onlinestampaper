@@ -16,21 +16,21 @@ e.preventDefault()
 
 return (<div className='container  border border-primary bg-light'>
  <div className="row">
-  <div className='col-sm-12 col-lg'>
-    <form onSubmit={handleSubmit} className='col-7 form-horizontal  p-4'>
+  <div className='col-sm-12 col-lg' >
+    <form onSubmit={handleSubmit} className=' form-horizontal'  style={{width:"60%"}}>
       <h3 className='h5 fw-bolder fs-5 text-lg-center text-primary'>ENTER CORRECT DATA INTO THE FORM</h3>
       <div className="form-group d-lg-flex d-sm-block my-4">
-        <label htmlFor="serialNo" className='col-3 h5 fw-bolder text-primary'>Serial No</label>
+        <label htmlFor="serialNo" className='col-4 h5 fw-bolder text-primary'>Serial No</label>
         <input 
         type="text"
-        className="form-control border-2 border-primary shadow"
+        className="form-control border-2 border-primary shadow "
         id="serialNo"
         value={serialNo}
         onChange={(e)=>{setSerialNo(e.target.value)}}
         />
       </div>
       <div class="form-group d-lg-flex d-sm-block my-4">
-        <label htmlFor="userName" className='col-3 h5 fw-bolder text-primary'>User Name</label>
+        <label htmlFor="userName" className='col-4 h5 fw-bolder text-primary'>User Name</label>
         <input type="text" 
         className="form-control border-2 border-primary shadow"
         id="userName"
@@ -39,7 +39,7 @@ return (<div className='container  border border-primary bg-light'>
         />
       </div>
       <div class="form-group d-lg-flex d-sm-block my-4">
-        <label htmlFor="licenceNo" className='col-3 h5 fw-bolder text-primary'>Licence No</label>
+        <label htmlFor="licenceNo" className='col-4 h5 fw-bolder text-primary'>Licence No</label>
         <input type="text"
          className="form-control border-2 border-primary shadow"
           id="licenceNo"
@@ -51,7 +51,7 @@ return (<div className='container  border border-primary bg-light'>
         {border:"1px solid blue" , marginBottom:"20px"}
         }> </div>
       <div className="form-group d-sm-block d-lg-flex">
-        <label htmlFor="title" className='col-2 h5 fw-bolder text-primary'>Title</label>
+        <label htmlFor="title" className='col-4 h5 fw-bolder text-primary'>Title</label>
         <input type="text" 
         className="form-control border-2 border-primary shadow "
         id="title"
@@ -69,7 +69,7 @@ return (<div className='container  border border-primary bg-light'>
         />
       </div>
       <div className="form-group d-lg-flex d-sm-block my-4">
-        <label htmlFor="customerCnic"  className='col-3 h5 fw-bolder text-primary'>Customer CNIC</label>
+        <label htmlFor="customerCnic"  className='col-4 h5 fw-bolder text-primary'>Customer CNIC</label>
         <input type="text" 
         className="form-control border-2 border-primary shadow" 
         id="customerCnic"
@@ -78,7 +78,7 @@ return (<div className='container  border border-primary bg-light'>
         />
       </div>
       <div className="form-group d-lg-flex d-sm-block my-4">
-        <label htmlFor="contactNo" className='col-3 h5 fw-bolder text-primary'>Contact No</label>
+        <label htmlFor="contactNo" className='col-4 h5 fw-bolder text-primary'>Contact No</label>
         <input type="text" 
         className="form-control border-2 border-primary shadow"
         id="contactNo"

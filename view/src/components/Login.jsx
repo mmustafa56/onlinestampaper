@@ -22,10 +22,10 @@ const Login = () => {
     }
 
   return (
-    <div className='container '>
-      <div className="row  loginRow">
-      <div className="col-sm-12 position-relative">
-        <form className='col-3 middleform bg-light rounded' onSubmit={handleSubmit}>
+    <div>
+      <div className="loginRow">
+      <div className="col-12 position-relative" style={{display:"flex",justifyContent:"center"}}>
+        <form className='col-md-6 col-lg-4 middleform bg-light rounded' onSubmit={handleSubmit}>
              <h4 className='text-center mt-5 fs-3'>LOGIN</h4>
             <div className=" d-block mt-4 mb-2 ">
               <label htmlFor="userid" className='my-1 fs-5'>ID Number</label>
@@ -51,8 +51,8 @@ const Login = () => {
               <button className='col-6 btn btn-primary text-dark border-dark  rounded-2'>Login</button>
             </div>
             <div className='justify-content-between'>
-              <button onClick={()=>{Navigate('/forgetPassword')}} className='ms-2  btn btn-text fw-bold text-primary'>Forgot Password</button>
-              <button onClick={()=>{Navigate('/register')}} className='ms-3  btn btn-text fw-bold text-primary'>Register</button>
+              <button onClick={()=>{Navigate('/forgetPassword')}} className=' btn btn-text fw-bold text-primary'>Forgot Password</button>
+              <button onClick={()=>{Navigate('/register')}} className=' btn btn-text fw-bold text-primary'>Register</button>
             </div>
         </form>
         </div>

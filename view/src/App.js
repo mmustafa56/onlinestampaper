@@ -18,30 +18,41 @@ import 'react-notifications/lib/notifications.css';
 import Example from "./FirstBootstrap";
 // import Button from  'react-bootstrap/Button';
 
+import AdminHome from "./components/AdminPanel/Home";
+import AdminNav from "./components/AdminPanel/Navbar";
+// import UserList from "./components/AdminPanel/UserList";
+
 
 function App() {
 
   // const [modalShow, setModalShow] = useState(false);
 
+
+  const userRoutes =  [
+    {
+      path:"/",
+      component:Home
+    }
+  ]
+
+  const AdminRoutes = [
+    {
+      path:'/admin',
+      componet:<AdminHome/>
+    },
+    {
+      path:'/user/list',
+      componet:<UserList/>
+    },
+  ]
+
+
  return (
     <div className="container">
-      {/* <Example/> */}
-
-      {/* This is the Model which we sit in a while  */}
-     {/* <Button variant="primary" onClick={() => setModalShow(true)}>
-          Launch vertically centered modal
-         </Button>
-        <MyVerticallyCenteredModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-     */}
-
-
-
       <NotificationContainer/>
       <Router>
-        <Nav/>
+        {/* <Nav/> */}
+        <AdminNav/>
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/home" element={<Home/>}/>
@@ -52,10 +63,22 @@ function App() {
           <Route path="/feeSlip" element={<FeeSlip/>}/>
           <Route path="/showForm" element={<ShowForm/>}/>
           <Route path="/forgetPassword" element={<ForgetPassword/>}/>
-          <Route path="/userList" element={<UserList/>}/>
+          <Route path="/user" element={<UserList/>}/>
           <Route path="/userVerification" element={<UserVerification/>}/>
           <Route path="/userStatus" element={<UserStatus/>}/>
-           <Route path="*" element={<Error/>}/>
+
+
+          {/* Admin Panel */}
+            {
+              AdminRoutes.map((e)=>{
+                return(
+                  <Route path={e.path} element={e.componet}/>
+                )
+              })
+            }
+          {/* Admin Panel */}
+
+          <Route path="*" element={<Error/>}/>
         </Routes>
       </Router>
     </div>

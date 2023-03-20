@@ -40,8 +40,8 @@ const [permAddress,setPermAddress] = useState();
 
   return (<div className="container">
        <div className="row registerRow">
-        <div className="col-sm-12">
-            <form className="col-lg-4 registerForm rounded-2" onSubmit={handleFormSubmit}>
+        <div className="col-sm-12" style={{display:"flex",justifyContent:"center"}}>
+            <form className="col-lg-6 col-md-8 registerForm rounded-2" onSubmit={handleFormSubmit}>
             <h1 className="text-center my-4" >SIGNUP</h1>
               <div className="d-lg-flex my-2">
               <label  htmlFor='firstName' className="col-lg-3 fs-6 fw-bold">First Name</label>

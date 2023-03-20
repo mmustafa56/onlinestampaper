@@ -5,10 +5,8 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Link, useNavigate } from 'react-router-dom';
-
-
  const UserList = () => {
-   const [users,setUsers] = useState();
+   const [users,setUsers] = useState([{idNumber:"234567",contact:"234567",firstName:"GHAYAS",lastName:"Ud Din"}]);
    const [show, setShow] = useState(false);
    const [formDetail, setFormDtail] = useState(false);
    const Navigate = useNavigate();
@@ -32,9 +30,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
    }, [])
 
-  //   let name = 'Mustafa';
-  //   let id = 19990;
-  //  NotificationManager.success(`User name ${name} Contact No ${id}  `,"",3000)
+    
+   
  
   return (<div className='container border border-dark'>
           <div className="row">
@@ -69,52 +66,39 @@ import { Link, useNavigate } from 'react-router-dom';
         <Modal.Body className='p-5 bg-light rounded '>
              <div className='py-3' >
               <label htmlFor="uname" className='col-4'>Name</label>
-              <input type="text"
-               id='uname'
-               name='uname'
-               value={name}
-               onChange={(e)=>{setName(e.target.value)}}  
-               />
+              <label htmlFor="uname" className='col-4'>GHAYAS</label>
+              
              </div>
 
              <div className='py-3' >
               <label htmlFor="id"  className='col-4'>ID</label>
-              <input type="text"
-               id='id'
-               name='id'
-               value={id}
-               onChange={(e)=>{setID(e.target.value)}}  
-               />
+              <label htmlFor="id"  className='col-4'>234567894567</label>
+              
              </div>
 
              <div className='py-3' >
               <label htmlFor="contact"  className='col-4'>Contact</label>
-              <input type="text"
-               id='contact'
-               name='contact'
-               value={contact}
-               onChange={(e)=>{setContact(e.target.value)}}  
-               />
+              <label htmlFor="contact"  className='col-4'>03543524531</label>
+              
              </div>
 
              <div className='py-3' >
               <label htmlFor="totalForm"  className='col-4'>Total Form</label>
               <button className='btn btn-outline-primary col-3 mx-5 fw-bold rounded-pill' onClick={formShow}>Show</button>
              </div>
+             <div className='text-center mt-5' >
+               <Button onClick={()=>{
+                NotificationManager.success(`Accepted Succesfully`,"Notification",3000)
+               }} className="col-4 fw-bolder mx-2">
+                   Accept
+              </Button>
+               <Button onClick={()=>{}} className="col-4 fw-bolder mx-2">
+                   Reject
+              </Button>
 
-             <div className='py-3' >
-              <label htmlFor="amount"  className='col-4'>Amount</label>
-              <input type="text"
-               id='amount'
-               name='amount'
-               value={amount}
-               onChange={(e)=>{setAmount(e.target.value)}}  
-               />
-             </div>
-             <div className='text-center mt-5'>
-               <Button onClick={()=>{Navigate('/')}} className="col-4 fw-bolder ">
-             <i class="bi bi-chevron-left fw-bold mx-1"></i>
-                Go Back</Button>
+              {/* <Button onClick={()=>{}} className="col-4 fw-bolder mx-2">
+                   Accepted
+              </Button> */}
              </div>
 
         </Modal.Body>

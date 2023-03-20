@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link} from 'react-router-dom';
-import logo from './Images/logo.jpeg';
+import logo from '../Images/logo.jpeg';
 
  const Nav = () => {
   return (
@@ -15,16 +15,13 @@ import logo from './Images/logo.jpeg';
         <div class="collapse navbar-collapse" id="userMenu">
             <ul class="navbar-nav ms-auto">
             <li class="nav-item mx-3">
-                <Link class="nav-link  shadow text-primary fw-bold border border-primary rounded-3" to={'/createForm'}>Create Form</Link>
+                <Link class="nav-link  shadow text-primary fw-bold border border-primary rounded-3" to={'/user'}>User List</Link>
             </li>
             <li class="nav-item mx-3">
-                <Link class="nav-link shadow text-primary fw-bold border border-primary rounded-3" to={'/totalForm'}>Total Form</Link>
+                <Link class="nav-link shadow text-primary fw-bold border border-primary rounded-3" to={'/request/list'}>Request List</Link>
             </li>
             <li class="nav-item mx-3">
-                <Link class="nav-link shadow text-primary fw-bold border border-primary rounded-3 px-3" to={'/feeSlip'} id="navbarDropdown" >Fee Slip </Link>
-            </li>
-            <li class="nav-item mx-3">
-                <Link class="nav-link  shadow text-primary fw-bold border border-primary rounded-3 " to={'/showForm'}>Show Form</Link>
+                <Link class="nav-link shadow text-primary fw-bold border border-primary rounded-3 px-3" to={'/verify/list'} id="navbarDropdown" >Verify List</Link>
             </li>
             <li class="nav-item mx-3">
             <i class="bi bi-question-circle text-primary fs-3 fw-bold pe-4"></i>
