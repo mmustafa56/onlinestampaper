@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const userRegister = new mongoose.Schema({
+const Form = new mongoose.Schema({
     _id:mongoose.Types.ObjectId,
-    uid:String,
-    first_name:{
+    serial_no:String,
+    user_name:{
         type:String,
     },
     last_name:{
@@ -12,27 +12,23 @@ const userRegister = new mongoose.Schema({
     licence_no:{
         type:Number,
     },
-    password:{
+    title:{
         type:String
     },
     contact:{
         type:String,
     },
-    p_address:{
+    customer_name:{
             type:String,
         },
-    c_address:{
+    customer_cnic:{
             type:String,
     },
-    city:{
-        type:String,
-    },
-    verify:{
+    accepted:{
         type:Boolean,
         default:false
     }
 },{timestamps:true})
 
 
-
-module.exports = mongoose.model("UserRegister",userRegister)
+module.exports = mongoose.model("Form",Form)

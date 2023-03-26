@@ -92,7 +92,9 @@ import { Link, useNavigate } from 'react-router-dom';
                }} className="col-4 fw-bolder mx-2">
                    Accept
               </Button>
-               <Button onClick={()=>{}} className="col-4 fw-bolder mx-2">
+               <Button onClick={()=>{
+                 NotificationManager.error (`Rejected Succesfully`,"Notification",3000)
+               }} className="col-4 fw-bolder mx-2">
                    Reject
               </Button>
 

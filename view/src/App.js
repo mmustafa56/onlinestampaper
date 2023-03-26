@@ -20,6 +20,9 @@ import Example from "./FirstBootstrap";
 
 import AdminHome from "./components/AdminPanel/Home";
 import AdminNav from "./components/AdminPanel/Navbar";
+import UserRequest from "./components/AdminPanel/UserRequest";
+import PaperList from "./components/AdminPanel/PaperList";
+import PaperRequest from "./components/AdminPanel/PaperRequest";
 // import UserList from "./components/AdminPanel/UserList";
 
 
@@ -37,12 +40,24 @@ function App() {
 
   const AdminRoutes = [
     {
-      path:'/admin',
+      path:'/',
       componet:<AdminHome/>
     },
     {
       path:'/user/list',
       componet:<UserList/>
+    },
+    {
+      path:'/user/request',
+      componet:<UserRequest/>
+    },
+    {
+      path:'/paper/list',
+      componet:<PaperList/>
+    },
+    {
+      path:'/paper/request',
+      componet:<PaperRequest/>
     },
   ]
 
@@ -51,7 +66,7 @@ function App() {
     <div className="container">
       <NotificationContainer/>
       <Router>
-        {/* <Nav/> */}
+        <Nav/>
         <AdminNav/>
         <Routes>
           <Route path="/" element={<Home/>}/>

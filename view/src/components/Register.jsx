@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './register.css'
 
+import {NotificationManager} from 'react-notifications';
+
 const  Register = () => {
   const Navigate = useNavigate()
 const [idNumber,setID] = useState();
@@ -14,27 +16,31 @@ const [city,setCity] = useState();
 const [dateOfBirth,setDOB] = useState();
 const [presAddress,setPresAddress] = useState();
 const [permAddress,setPermAddress] = useState();
+const [password,setPassword] = useState();
 
   
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:5000/api/user',{
-                  idNumber:idNumber,
-                  firstName:firstName,
-                  lastName:lastName,
+    axios.post('http://localhost:9000/api/user/signup',{
+                  uid:idNumber,
+                  first_name:firstName,
+                  last_name:lastName,
                   contact:contact,
-                  licenceNo:licenceNo,
+                  licence_no:licenceNo,
                   city:city,
-                  dateOfBirth:dateOfBirth,
-                  presAddress:presAddress,
-                  permAddress:permAddress
+                  dob:dateOfBirth,
+                  p_address:presAddress,
+                  c_address:permAddress,
+                  password:password
               })
               .then((data)=>{
                 console.log(data)
+                NotificationManager.success(`User ${firstName}   `,"Registered",3000)
               })
               .catch((err)=>{
                 console.log(err)
+                NotificationManager.error(`${err.response.data.message}   `,"Not Registered",3000)
               })
   };
 
@@ -77,6 +83,18 @@ const [permAddress,setPermAddress] = useState();
                 name='userID'
                 value={idNumber}
                 onChange={(e)=>{setID(e.target.value)}}
+              />
+              </div>
+              <div className="d-lg-flex my-2">
+              <label  className='col-lg-3 fs-6 fw-bold ' htmlFor='userID'>Password</label>
+              <input
+                id="password"
+                type="password"
+                className="form-control border border-primary"
+                placeholder="password"
+                name='Password'
+                value={password}
+                onChange={(e)=>{setPassword(e.target.value)}}
               />
               </div>
               <div className="d-lg-flex my-2">

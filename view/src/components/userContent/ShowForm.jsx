@@ -1,8 +1,13 @@
-import React, { createElement } from 'react';
+import React, { createElement, useEffect } from 'react';
 import firstImg from '../Images/firstImg.jpeg';
 import Printer, { print } from 'react-pdf-print'
 
 const ShowForm = () => {
+
+
+  useEffect(()=>{
+    
+  },[])
   const ids = ['1']
   return (
     <div className='container border border-primary bg-light'>
@@ -14,9 +19,15 @@ const ShowForm = () => {
         </div>
         <div className='col-sm-10 text-center my-2'>
         <Printer>
-            <div id={ids[0]} style={{ width:'210mm', height: '297mm' }}>
-            <img src={firstImg} alt="This is the stamp..." style={{width:'100%'}} />
-            </div>
+          <div id={ids[0]} style={{ width:'210mm' }}>
+            {Array(1).fill().map((e)=>{
+              return(
+                <div  style={{ width:'210mm', height: '297mm' }}>
+                  <img src={firstImg} alt="This is the stamp..." style={{width:'100%'}} />
+                </div>
+              )
+            })}
+          </div>
         </Printer>
          {/* <img src={firstImg} alt="This is the stamp..." /> */}
         </div>

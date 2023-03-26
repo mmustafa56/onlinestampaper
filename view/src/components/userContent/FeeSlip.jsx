@@ -1,18 +1,14 @@
 import React from 'react';
 import './TotalForm.css';
 import './FeeSlip.css';
-import feeImg from '../Images/feeSlip.jpeg'
-
-import Printer, { print } from 'react-pdf-print'
-
+import { useRef } from 'react';
+import ReactToPrint from 'react-to-print';
  const FeeSlip = () => {
-  const ids = ['1']
+  const componentRef = useRef();
   return(
      <div className='container bg-primary' style={{overflow:'hidden',display:'flex',justifyContent:'center',flexDirection:"column"}} >
       <div className="overF" style={{overflowX:'scroll',padding:"20px",width:'100%'}}>
-      <Printer>
-       {/* <div id={ids[0]} className='row' style={{backgroundColor:"white" ,padding:"10px",width:"277mm" ,height:'277mm'}}> */}
-       <div className='row' id={ids[0]} style={{ width:'277mm', height: '297mm' }}>
+      <div className='row' style={{ width:'277mm'}}  ref={componentRef}>
         
          <div className="col-4  my-2 bg-light br-1">
            <h4 className='text-center mb-5'>Fee Slip</h4>
@@ -136,14 +132,24 @@ import Printer, { print } from 'react-pdf-print'
            <h5 className='text-center'>Bank Copy</h5>
          </div>
        </div>
-        </Printer>
         </div>
 
+
+
+        
        <div className='row m-2'>
         <div className="col-sm-12 pb-2">
          <div className='float-end pe-5 d-flex' >
-          <button className='btn col-7 rounded border-2 bg-light mx-1  fw-bolder' onClick={() => print(ids)}> Download</button>
-          <button className='btn col-7 rounded border-2  bg-light  fw-bolder'>Print</button>
+         <ReactToPrint
+        trigger={() => <button className='btn col-7 rounded border-2 bg-light mx-1  fw-bolder' > Download</button>}
+        content={() => componentRef.current}
+      />
+      <ReactToPrint
+        trigger={() => <button className='btn col-7 rounded border-2  bg-light  fw-bolder'>Print</button>}
+        content={() => componentRef.current}
+      />
+          
+          
          </div>
         </div>
         </div>

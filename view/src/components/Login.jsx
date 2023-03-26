@@ -3,22 +3,57 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './login.css'
 
+import {NotificationManager} from 'react-notifications';
+
+
+//***************API*****************//
+
+/////////////SET REDUX//////////////
+import { useDispatch } from 'react-redux';
+import * as actionCreator from "../state/Action/action"
+import { bindActionCreators } from 'redux';
+///////////////SET REDUX//////////////
+
+//////////////GET REDUX//////////////
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+///////////////GET REDUX//////////////
+
+
 const Login = () => {
+
+    /////////////SET REDUX//////////////
+    const dispatch = useDispatch()
+    const action = bindActionCreators(actionCreator, dispatch)
+    /////////////SET REDUX//////////////
+
+    /////////////GET REDUX//////////////
+    const state = useSelector((state) => state.LogIn)
+    /////////////GET REDUX//////////////
+
+    const navigate = useNavigate()
+    useEffect(()=>{
+      if (state) {
+          navigate('/')
+        }
+  },[state])
     const Navigate = useNavigate();
     const [password,setPassword] =useState();
     const [userid,setUserID] =useState();
 
     const handleSubmit =(event)=>{
         event.preventDefault();
-        axios.post('http://localhost:5001/api/user',{
+        axios.post('http://localhost:9000/api/user/signin',{
             password:password,
-            id : userid
+            uid : userid
         }).then((res)=>{
             console.log(res)
+            action.LogIn(res.data)
+            NotificationManager.success(`LogIn Successfully  `,"Success",3000)
         }).catch((err)=>{
             console.log(err)
+            NotificationManager.error(`${err.response.data.message}   `,"Error",3000)
         })
-      Navigate('/home');
     }
 
   return (
