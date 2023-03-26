@@ -15,7 +15,7 @@ import UserVerification from "./components/adminContent/UserVerification";
 import UserStatus from "./components/adminContent/UserStatus";
 import { NotificationContainer } from "react-notifications";
 import 'react-notifications/lib/notifications.css';
-import Example from "./FirstBootstrap";
+// import Example from "./FirstBootstrap";
 // import Button from  'react-bootstrap/Button';
 
 import AdminHome from "./components/AdminPanel/Home";

@@ -2,11 +2,9 @@ const mongoose = require('mongoose');
 
 const Form = new mongoose.Schema({
     _id:mongoose.Types.ObjectId,
+    uid:mongoose.Types.ObjectId,
     serial_no:String,
     user_name:{
-        type:String,
-    },
-    last_name:{
         type:String,
     },
     licence_no:{
