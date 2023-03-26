@@ -90,5 +90,42 @@ module.exports = {
                 err
             })
         }
+    },
+    getAllUser:async(req,res)=>{
+        try{
+            const allUser = await User.find({})
+            return res.status(500).json({
+                success:true,
+                data:allUser
+            })
+        }catch(err){
+            console.log(err);
+            return res.status(500).json({
+                success:false,
+                message:'server issue try again later',
+                err
+            })
+        }
+    },
+    acceptUser:async(req,res)=>{
+        try{
+
+            await User.updateOne({_id:req.params.id},{
+                $set:{
+                    verify:true
+                }
+            })
+            return res.status(500).json({
+                success:true,
+                message:'Accepted Successfully'
+            })
+        }catch(err){
+            console.log(err);
+            return res.status(500).json({
+                success:false,
+                message:'server issue try again later',
+                err
+            })
+        }
     }
 }
