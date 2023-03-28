@@ -9,7 +9,7 @@ route.post('/signup',SignUp)
 route.post('/signin',SignIn)
 
 route.post('/create/form',auth,createForm)
-route.post('/get/form',auth,getAllForm)
+route.get('/get/form',auth,getAllForm)
 route.post('/get/form/:id',auth,getOneForm)
 
 module.exports = route

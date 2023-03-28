@@ -6,7 +6,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Link, useNavigate } from 'react-router-dom';
  const UserList = () => {
-   const [users,setUsers] = useState([{idNumber:"234567",contact:"234567",firstName:"GHAYAS",lastName:"Ud Din"}]);
+   const [users,setUsers] = useState([]);
+   const [seletcted,setseletcted] = useState({});
    const [show, setShow] = useState(false);
    const [formDetail, setFormDtail] = useState(false);
    const Navigate = useNavigate();
@@ -14,18 +15,40 @@ import { Link, useNavigate } from 'react-router-dom';
    const handleShow = () => setShow(true);
    const formClose = () => setFormDtail(false);
    const formShow = () => setFormDtail(true);
-   const [name,setName] = useState();
-   const [id,setID] = useState();
-   const [contact,setContact] = useState();
-   const [amount,setAmount] = useState();
+
+
+   const Accept = (id) =>{
+    axios.put('http://localhost:9000/api/admin/get/user/'+id)
+    .then((res)=>{
+     console.log(res)
+     NotificationManager.success(`Accepted Succesfully`,"Notification",3000)
+    })
+    .catch((error)=>{
+     console.log(error)
+     NotificationManager.error (`Some thing went wrong`,"Error",3000)
+    })
+   }
+   const Delete = (id) =>{
+    axios.delete('http://localhost:9000/api/admin/get/user/'+id)
+    .then((res)=>{
+     console.log(res)
+     NotificationManager.success(`Accepted Succesfully`,"Notification",3000)
+    })
+    .catch((error)=>{
+     console.log(error)
+     NotificationManager.error (`Some thing went wrong`,"Error",3000)
+    })
+   }
   
    useEffect(()=>{
-    axios.get('http://localhost:5000/api/user')
+    axios.get('http://localhost:9000/api/admin/get/user')
          .then((res)=>{
-              setUsers(res.data)
+          console.log(res)
+           setUsers(res.data.data)
          })
          .catch((error)=>{
           console.log(error)
+          
          })
 
    }, [])
@@ -36,21 +59,28 @@ import { Link, useNavigate } from 'react-router-dom';
   return (<div className='container border border-dark'>
           <div className="row">
             <div className="col-sm-12">
-            <table class="table">
+            <table className="table">
               <thead>
                 <tr>
                   <th>User ID</th>
                   <th>Name</th>
                   <th>Contact</th>
+                  <th>States</th>
                 </tr>
               </thead>
               <tbody>
                   {users? users.map((user)=>{
-                           return <tr onClick={handleShow}>
-                                 <td>{user.idNumber}</td>
-                                 <td>{user.firstName+" "+user.lastName}</td>
-                                 <td>{user.contact}</td>
-                           </tr>
+                      return <tr onClick={()=>{
+                        setseletcted(user)
+                        handleShow()
+                      }}>
+                            <td>{user._id}</td>
+                            <td>{user.first_name+" "+user.last_name}</td>
+                            <td>{user.contact}</td>
+                            <td>
+                              <button className='btn btn-primary'>Verifyed</button>
+                            </td>
+                      </tr>
                    } ):<p className='text-center fs-2 fw-bolder'>No user</p>}
               </tbody>
             </table>
@@ -65,42 +95,49 @@ import { Link, useNavigate } from 'react-router-dom';
       >
         <Modal.Body className='p-5 bg-light rounded '>
              <div className='py-3' >
-              <label htmlFor="uname" className='col-4'>Name</label>
-              <label htmlFor="uname" className='col-4'>GHAYAS</label>
+              <label htmlFor="uname" className='col-6'>Name</label>
+              <label htmlFor="uname" className='col-6'>
+                {seletcted.first_name+" "+seletcted.last_name}
+              </label>
               
              </div>
 
              <div className='py-3' >
-              <label htmlFor="id"  className='col-4'>ID</label>
-              <label htmlFor="id"  className='col-4'>234567894567</label>
+              <label htmlFor="id"  className='col-6'>ID</label>
+              <label htmlFor="id"  className='col-4'>
+                {seletcted._id}
+              </label>
               
              </div>
 
              <div className='py-3' >
-              <label htmlFor="contact"  className='col-4'>Contact</label>
-              <label htmlFor="contact"  className='col-4'>03543524531</label>
+              <label htmlFor="contact"  className='col-6'>Contact</label>
+              <label htmlFor="contact"  className='col-6'>
+                {seletcted.contact}
+              </label>
               
              </div>
 
-             <div className='py-3' >
-              <label htmlFor="totalForm"  className='col-4'>Total Form</label>
-              <button className='btn btn-outline-primary col-3 mx-5 fw-bold rounded-pill' onClick={formShow}>Show</button>
-             </div>
              <div className='text-center mt-5' >
-               <Button onClick={()=>{
-                NotificationManager.success(`Accepted Succesfully`,"Notification",3000)
-               }} className="col-4 fw-bolder mx-2">
-                   Accept
-              </Button>
-               <Button onClick={()=>{
-                 NotificationManager.error (`Rejected Succesfully`,"Notification",3000)
-               }} className="col-4 fw-bolder mx-2">
-                   Reject
-              </Button>
+               {
 
-              {/* <Button onClick={()=>{}} className="col-4 fw-bolder mx-2">
+                seletcted.verify ?  
+                <Button onClick={()=>{}} className="col-4 fw-bolder mx-2">
                    Accepted
-              </Button> */}
+                </Button>
+                :<>
+                <Button onClick={()=>{
+                  Accept(seletcted._id)
+                 }} className="col-4 fw-bolder mx-2 btn btn-success">
+                     Accept
+                </Button>
+                 <Button onClick={()=>{
+                  Delete(seletcted._id)
+                 }} className="col-4 fw-bolder mx-2 btn btn-danger">
+                     Delete
+                </Button>
+                </>
+               }
              </div>
 
         </Modal.Body>

@@ -1,8 +1,30 @@
 import React from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import logo from './Images/logo.jpeg';
 
+/////////////SET REDUX//////////////
+import { useDispatch } from 'react-redux';
+import * as actionCreator from "../state/Action/action"
+import { bindActionCreators } from 'redux';
+///////////////SET REDUX//////////////
+
+//////////////GET REDUX//////////////
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+///////////////GET REDUX//////////////
+
+
  const Nav = () => {
+      const nv  = useNavigate()
+      /////////////SET REDUX//////////////
+      const dispatch = useDispatch()
+      const action = bindActionCreators(actionCreator, dispatch)
+      /////////////SET REDUX//////////////
+  
+      /////////////GET REDUX//////////////
+      const state = useSelector((state) => state.LogIn)
+      /////////////GET REDUX//////////////
+
   return (
     <div className='container border border-primary bg-light rounded-top'>
       <nav class="navbar navbar-expand-lg ">
@@ -26,8 +48,11 @@ import logo from './Images/logo.jpeg';
             <li class="nav-item mx-3">
                 <Link class="nav-link  shadow text-primary fw-bold border border-primary rounded-3 " to={'/showForm'}>Show Form</Link>
             </li>
-            <li class="nav-item mx-3">
-            <i class="bi bi-question-circle text-primary fs-3 fw-bold pe-4"></i>
+            <li class="nav-item mx-1">
+                  <button className='btn btn-danger' onClick={()=>{
+                    action.LogOut()
+                    nv('/login')
+                  }}>LogOut</button>
             </li>
             </ul>
         </div>

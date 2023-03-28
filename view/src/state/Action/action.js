@@ -1,4 +1,4 @@
-import { ErrorMessageC, ErrorMessageT, LogInC, LogOutC, SearchEndT, SearchStartT, SuccessMessageC, SuccessMessageT } from "../Constants/Constant"
+import { ErrorMessageC, ErrorMessageT, LogInAdminC, LogInC, LogOutAdminC, LogOutC, SearchEndT, SearchStartT, SuccessMessageC, SuccessMessageT } from "../Constants/Constant"
 
 export const ChangeBar = (data) => {
     return (dispatch) => {
@@ -9,6 +9,22 @@ export const ChangeBar = (data) => {
     }
 }
 
+export const LogInAdmin = (data) => {
+    return (dispatch) => {
+        dispatch({
+            type: LogInAdminC,
+            payload: data
+        })
+    }
+}
+
+export const LogOutAdmin = () => {
+    return (dispatch) => {
+        dispatch({
+            type: LogOutAdminC
+        })
+    }
+}
 export const LogIn = (data) => {
     return (dispatch) => {
         dispatch({

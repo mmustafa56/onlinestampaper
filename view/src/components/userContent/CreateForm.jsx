@@ -1,23 +1,67 @@
 import React,{useState} from 'react';
 import './CreateForm.css'
+import axios from 'axios';
+import {NotificationManager} from 'react-notifications';
+
+//////////////GET REDUX//////////////
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+///////////////GET REDUX//////////////
 
 const CreateForm = () => {
-const [serialNo,setSerialNo] = useState();
-const [userName,setUserName] = useState();
-const [licenceNo,setLicenceNo] = useState();
-const [title,setTitle] = useState();
-const [customerName,setCustomerName] = useState();
-const [customerCnic,setCustomerCnic] = useState();
-const [contactNo,setContactNo] = useState();
+
+
+/////////////GET REDUX//////////////
+const state = useSelector((state) => state.LogIn)
+/////////////GET REDUX//////////////
+
+const nv = useNavigate()
+useEffect(()=>{
+  if(!state){
+    nv('/login')
+  }
+},[state])
+
+const [serialNo,setSerialNo] = useState('');
+const [userName,setUserName] = useState('');
+const [licenceNo,setLicenceNo] = useState('');
+const [title,setTitle] = useState('');
+const [customerName,setCustomerName] = useState('');
+const [customerCnic,setCustomerCnic] = useState('');
+const [contactNo,setContactNo] = useState('');
 
 const handleSubmit =(e)=>{
-e.preventDefault()
+  e.preventDefault();
+  axios({
+  method:'post',
+  headers:{
+    'Authorization': `Bearer ${state.token}`
+  },
+  url:'http://localhost:9000/api/user/create/form',
+  data:{
+    serial_no:serialNo,
+    user_name: userName,
+    title: title,
+    licence_no: licenceNo,
+    contact: contactNo,
+    customer_name: customerName,
+    customer_cnic: customerCnic,
+  }
+  }).then((res)=>{
+      console.log(res)
+      NotificationManager.success(`Created Successfully  `,"Success",3000)
+  }).catch((err)=>{
+      console.log(err)
+      NotificationManager.error(`${err.response.data.message}   `,"Error",3000)
+  })
+
 }
 
 return (<div className='container  border border-primary bg-light'>
  <div className="row">
   <div className='col-sm-12 col-lg' >
-    <form onSubmit={handleSubmit} className=' form-horizontal'  style={{width:"60%"}}>
+    <form  className=' form-horizontal'  style={{width:"60%"}}>
       <h3 className='h5 fw-bolder fs-5 text-lg-center text-primary'>ENTER CORRECT DATA INTO THE FORM</h3>
       <div className="form-group d-lg-flex d-sm-block my-4">
         <label htmlFor="serialNo" className='col-4 h5 fw-bolder text-primary'>Serial No</label>
@@ -87,7 +131,7 @@ return (<div className='container  border border-primary bg-light'>
          />
       </div>
       <div className='text-lg-center '>
-      <button type='submit' className='col-lg-4 col-sm-12 btn btn-sm-block btn-primary  rounded-3 fs-5 border border-dark'>Submit</button>
+      <button  onClick={handleSubmit} className='col-lg-4 col-sm-12 btn btn-sm-block btn-primary  rounded-3 fs-5 border border-dark'>Submit</button>
       </div>
 </form>
 </div>

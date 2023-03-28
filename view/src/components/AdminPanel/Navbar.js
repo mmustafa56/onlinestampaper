@@ -1,8 +1,26 @@
 import React from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import logo from '../Images/logo.jpeg';
 
+/////////////SET REDUX//////////////
+import { useDispatch } from 'react-redux';
+import * as actionCreator from "../../state/Action/action"
+import { bindActionCreators } from 'redux';
+///////////////SET REDUX//////////////
+
+
  const Nav = () => {
+
+   /////////////SET REDUX//////////////
+   const dispatch = useDispatch()
+   const action = bindActionCreators(actionCreator, dispatch)
+   /////////////SET REDUX//////////////
+
+
+   const nv = useNavigate()
+
+
+
   return (
     <div className='container border border-primary bg-light rounded-top'>
       <nav class="navbar navbar-expand-lg ">
@@ -27,7 +45,11 @@ import logo from '../Images/logo.jpeg';
                   <Link class="nav-link shadow text-primary fw-bold border border-primary rounded-3" to={'/paper/request'}>Paper Request</Link>
               </li>
               <li class="nav-item mx-1">
-                  <i class="bi bi-question-circle text-primary fs-3 fw-bold pe-4"></i>
+                  <button className='btn btn-danger' onClick={()=>{
+                    action.LogOutAdmin()
+                    nv('/login')
+                  }}>LogOut</button>
+                
               </li>
             </ul>
         </div>

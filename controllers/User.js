@@ -42,7 +42,7 @@ module.exports = {
     getAllForm:async(req,res)=>{
         try{
             const allform = await Form.find({uid:req.payload._id})
-            return res.status(500).json({
+            return res.json({
                 success:true,
                 data:allform
             })
@@ -58,7 +58,7 @@ module.exports = {
     getOneForm:async(req,res)=>{
         try{
             const allform = await Form.findOne({uid:req.payload._id,_id:req.params.id})
-            return res.status(500).json({
+            return res.json({
                 success:true,
                 data:allform
             })

@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 const Joi = require('joi')
+const bcrypt = require("bcryptjs")
+const salt = bcrypt.genSaltSync(10);
 const jwtKey = process.env.jwtKey || 'LogIn'
 const forgetKey = process.env.jwtKey || 'forgetKey'
 const mongoose = require('mongoose')
@@ -20,7 +22,8 @@ module.exports = {
             })
         }
         try{
-            const user = await User.findOne({uid:req.body.uid,admin:true})
+            // const user = await User.findOne({uid:req.body.uid,admin:true})
+            const user = await User.findOne({uid:req.body.uid})
             if(user){
                 const isPsswordcorrect = bcrypt.compareSync(req.body.password, user.password)
                 if(isPsswordcorrect){
@@ -57,7 +60,7 @@ module.exports = {
     getAllForm:async(req,res)=>{
         try{
             const allform = await Form.find({})
-            return res.status(500).json({
+            return res.json({
                 success:true,
                 data:allform
             })
@@ -69,7 +72,8 @@ module.exports = {
                 err
             })
         }
-    },
+    }
+    ,
     acceptForm:async(req,res)=>{
         try{
             // const allform = await Form.find({})
@@ -78,7 +82,25 @@ module.exports = {
                     accepted:true
                 }
             })
+            return res.json({
+                success:true,
+                message:'Accepted Successfully'
+            })
+        }catch(err){
+            console.log(err);
             return res.status(500).json({
+                success:false,
+                message:'server issue try again later',
+                err
+            })
+        }
+    }
+    ,
+    DeleteForm:async(req,res)=>{
+        try{
+            // const allform = await Form.find({})
+            await Form.deleteOne({_id:req.params.id})
+            return res.json({
                 success:true,
                 message:'Accepted Successfully'
             })
@@ -94,7 +116,7 @@ module.exports = {
     getAllUser:async(req,res)=>{
         try{
             const allUser = await User.find({})
-            return res.status(500).json({
+            return res.json({
                 success:true,
                 data:allUser
             })
@@ -106,7 +128,8 @@ module.exports = {
                 err
             })
         }
-    },
+    }
+    ,
     acceptUser:async(req,res)=>{
         try{
 
@@ -115,9 +138,26 @@ module.exports = {
                     verify:true
                 }
             })
-            return res.status(500).json({
+            return res.json({
                 success:true,
                 message:'Accepted Successfully'
+            })
+        }catch(err){
+            console.log(err);
+            return res.status(500).json({
+                success:false,
+                message:'server issue try again later',
+                err
+            })
+        }
+    }
+    ,
+    deleteUser:async(req,res)=>{
+        try{
+            await User.deleteOne({_id:req.params.id})
+            return res.json({
+                success:true,
+                message:'Deleted Successfully'
             })
         }catch(err){
             console.log(err);

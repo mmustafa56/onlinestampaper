@@ -10,7 +10,7 @@ import TotalForm from "./components/userContent/TotalForm";
 import FeeSlip from "./components/userContent/FeeSlip";
 import ShowForm from "./components/userContent/ShowForm";
 import ForgetPassword from "./components/ForgetPassword";
-import UserList from "./components/adminContent/UserList";
+// import UserList from "./components/adminContent/UserList";
 import UserVerification from "./components/adminContent/UserVerification";
 import UserStatus from "./components/adminContent/UserStatus";
 import { NotificationContainer } from "react-notifications";
@@ -23,19 +23,60 @@ import AdminNav from "./components/AdminPanel/Navbar";
 import UserRequest from "./components/AdminPanel/UserRequest";
 import PaperList from "./components/AdminPanel/PaperList";
 import PaperRequest from "./components/AdminPanel/PaperRequest";
-// import UserList from "./components/AdminPanel/UserList";
+import UserList from "./components/AdminPanel/UserList";
+import LogInAdminPage from "./components/AdminPanel/LoginAdmin";
+
+//////////////GET REDUX//////////////
+import { useSelector } from 'react-redux';
+import GBar from "./components/GBar";
+///////////////GET REDUX//////////////
 
 
 function App() {
 
   // const [modalShow, setModalShow] = useState(false);
 
+   /////////////GET REDUX//////////////
+   const user = useSelector((user) => user.LogIn)
+   const admin = useSelector((admin) => admin.Admin)
+   /////////////GET REDUX//////////////
 
+
+   const genralRoutes = [
+    {
+      path:"/login",
+      component:<Login/>
+    },
+    {
+      path:'/admin/login',
+      componet:<LogInAdminPage/>
+    },
+   ]
   const userRoutes =  [
     {
       path:"/",
-      component:Home
-    }
+      component:<Home/>
+    },
+    {
+      path:"/register",
+      component:<Register/>
+    },
+    {
+      path:"/createForm",
+      component:<CreateForm/>
+    },
+    {
+      path:"/totalForm",
+      component:<TotalForm/>
+    },
+    {
+      path:"/feeSlip",
+      component:<FeeSlip/>
+    },
+    {
+      path:"/showForm",
+      component:<ShowForm/>
+    },
   ]
 
   const AdminRoutes = [
@@ -58,7 +99,7 @@ function App() {
     {
       path:'/paper/request',
       componet:<PaperRequest/>
-    },
+    }
   ]
 
 
@@ -66,30 +107,49 @@ function App() {
     <div className="container">
       <NotificationContainer/>
       <Router>
-        <Nav/>
-        <AdminNav/>
+          {/* TopBar Selection */}
+            {
+              user?<Nav/>:admin?<AdminNav/>:<GBar/>
+            }
+          {/* TopBar Selection */}
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/createForm" element={<CreateForm/>}/>
-          <Route path="/totalForm" element={<TotalForm/>}/>
-          <Route path="/feeSlip" element={<FeeSlip/>}/>
-          <Route path="/showForm" element={<ShowForm/>}/>
-          <Route path="/forgetPassword" element={<ForgetPassword/>}/>
-          <Route path="/user" element={<UserList/>}/>
-          <Route path="/userVerification" element={<UserVerification/>}/>
-          <Route path="/userStatus" element={<UserStatus/>}/>
 
 
+        {/* Not LogIn */}
+
+        {/* Not LogIn */}
+            {
+                // user && !admin ? 
+                  // <Nav/> 
+                    genralRoutes.map((e)=>{
+                      return(
+                        <Route path={e.path} element={e.componet}/>
+                      )
+                    })
+                // :null
+              }
+        {/* User Panel */}
+            {
+            user ? 
+              // <Nav/> 
+                userRoutes.map((e)=>{
+                  return(
+                    <Route path={e.path} element={e.componet}/>
+                  )
+                })
+            :null
+            }
+          {/* User Panel */}
           {/* Admin Panel */}
             {
-              AdminRoutes.map((e)=>{
-                return(
-                  <Route path={e.path} element={e.componet}/>
-                )
-              })
+              admin?
+                // <AdminNav/>
+                  AdminRoutes.map((e)=>{
+                    return(
+                      <Route path={e.path} element={e.componet}/>
+                    )
+                  })
+              :null
             }
           {/* Admin Panel */}
 
