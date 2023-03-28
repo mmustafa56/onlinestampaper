@@ -76,7 +76,7 @@ export default function App() {
       component:<FeeSlip/>
     },
     {
-      path:"/showForm",
+      path:"/showForm/:id",
       component:<ShowForm/>
     },
   ]
