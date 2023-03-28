@@ -62,7 +62,7 @@ const getForm =()=>{
                                  <td>{user.title}</td>
                                  <td>{user.contact}</td>
                                  <td>
-                                  <button disabled={!user.accepted} onClick={()=>{nv('/show/'+user._id)}} className={user.accepted ? 'btn btn-primary':'btn btn-danger'}>SHOW</button>
+                                  <button disabled={!user.accepted} onClick={()=>{nv('/showForm/'+user._id)}} className={user.accepted ? 'btn btn-primary':'btn btn-danger'}>SHOW</button>
                                  </td>
                            </tr>
                    } ):<p className='text-center fs-2 fw-bolder'>No user</p>}

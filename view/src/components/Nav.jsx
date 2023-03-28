@@ -51,9 +51,6 @@ import { useEffect } from 'react';
                   <Link class="nav-link shadow text-primary fw-bold border border-primary rounded-3 px-3" to={'/feeSlip'} id="navbarDropdown" >Fee Slip </Link>
               </Nav.Link>
               <Nav.Link>
-                  <Link class="nav-link  shadow text-primary fw-bold border border-primary rounded-3 " to={'/showForm'}>Show Form</Link>
-              </Nav.Link>
-              <Nav.Link>
               <button className='btn btn-danger' onClick={()=>{
                     action.LogOut()
                     nv('/login')

@@ -50,6 +50,7 @@ const handleSubmit =(e)=>{
   }
   }).then((res)=>{
       console.log(res)
+      nv('/totalForm')
       NotificationManager.success(`Created Successfully  `,"Success",3000)
   }).catch((err)=>{
       console.log(err)
