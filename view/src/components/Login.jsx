@@ -61,7 +61,7 @@ const Login = () => {
       <div className="loginRow">
       <div className="col-12 position-relative" style={{display:"flex",justifyContent:"center"}}>
         <form className='col-md-6 col-lg-4 middleform bg-light rounded' onSubmit={handleSubmit}>
-             <h4 className='text-center mt-5 fs-3'>LOGIN</h4>
+             <h4 className='text-center mt-5 fs-3'>LOGIN </h4>
             <div className=" d-block mt-4 mb-2 ">
               <label htmlFor="userid" className='my-1 fs-5'>ID Number</label>
               <input type="text"

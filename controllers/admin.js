@@ -7,12 +7,13 @@ const forgetKey = process.env.jwtKey || 'forgetKey'
 const mongoose = require('mongoose')
 
 const User = require('../Models/User')
+const Admin = require('../Models/admin')
 const Form = require('../Models/Form')
 
 module.exports = {
     SignIn:async(req,res)=>{
         const value = Joi.object({
-            uid: Joi.string().required(),
+            email: Joi.string().email().required(),
             password: Joi.string().required()
         }).validate(req.body)
         if(value.error){
@@ -23,13 +24,13 @@ module.exports = {
         }
         try{
             // const user = await User.findOne({uid:req.body.uid,admin:true})
-            const user = await User.findOne({uid:req.body.uid})
-            if(user){
-                const isPsswordcorrect = bcrypt.compareSync(req.body.password, user.password)
+            const admin = await Admin.findOne({email:req.body.email})
+            if(admin){
+                const isPsswordcorrect = bcrypt.compareSync(req.body.password, admin.password)
                 if(isPsswordcorrect){
-                    const UserData = user.toObject()
-                    delete UserData.password
-                    const token = jwt.sign(UserData,jwtKey)
+                    const adminData = admin.toObject()
+                    delete adminData.password
+                    const token = jwt.sign(adminData,jwtKey)
                     return res.json({
                         success:true,
                         message:'Successfully LogIn',

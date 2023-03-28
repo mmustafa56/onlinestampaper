@@ -44,7 +44,7 @@ const Login = () => {
         event.preventDefault();
         axios.post('http://localhost:9000/api/admin/signin',{
             password:password,
-            uid : userid
+            email : userid
         }).then((res)=>{
             console.log(res)
             action.LogInAdmin(res.data)
@@ -60,13 +60,13 @@ const Login = () => {
       <div className="loginRow">
       <div className="col-12 position-relative" style={{display:"flex",justifyContent:"center"}}>
         <form className='col-md-6 col-lg-4 middleform bg-light rounded' onSubmit={handleSubmit}>
-             <h4 className='text-center mt-5 fs-3'>LOGIN</h4>
+             <h4 className='text-center mt-5 fs-3'>LOGIN AS ADMIN</h4>
             <div className=" d-block mt-4 mb-2 ">
-              <label htmlFor="userid" className='my-1 fs-5'>ID Number</label>
+              <label htmlFor="userid" className='my-1 fs-5'>Email</label>
               <input type="text"
                 id='userid'
                 className="form-control border border-primary "
-                placeholder="Enter ID number"
+                placeholder="Enter Email"
                 value={userid}
                 onChange={(e)=>{setUserID(e.target.value)}}
                 />
