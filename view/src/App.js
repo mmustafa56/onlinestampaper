@@ -52,6 +52,10 @@ export default function App() {
       path:"/register",
       component:<Register/>
     },
+    {
+      path:"/",
+      component:<Home/>
+    },
    ]
   const userRoutes =  [
     {

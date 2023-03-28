@@ -48,6 +48,7 @@ const Login = () => {
         }).then((res)=>{
             console.log(res)
             action.LogInAdmin(res.data)
+            navigate('/')
             NotificationManager.success(`LogIn Successfully  `,"Success",3000)
         }).catch((err)=>{
             console.log(err)

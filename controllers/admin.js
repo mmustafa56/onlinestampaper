@@ -25,6 +25,8 @@ module.exports = {
         try{
             // const user = await User.findOne({uid:req.body.uid,admin:true})
             const admin = await Admin.findOne({email:req.body.email})
+            const xx = await Admin.findOne({})
+            console.log(xx)
             if(admin){
                 const isPsswordcorrect = bcrypt.compareSync(req.body.password, admin.password)
                 if(isPsswordcorrect){
@@ -159,6 +161,27 @@ module.exports = {
             return res.json({
                 success:true,
                 message:'Deleted Successfully'
+            })
+        }catch(err){
+            console.log(err);
+            return res.status(500).json({
+                success:false,
+                message:'server issue try again later',
+                err
+            })
+        }
+    },
+    createAdmin:async(req,res)=>{
+        try{
+            const newuser = new Admin({
+                email:'admin@gmail.com',
+                password:bcrypt.hashSync('admin', salt)
+            })
+            newuser._id = new mongoose.Types.ObjectId()
+            const creatuser = await newuser.save()
+            return res.json({
+                success:true,
+                message:'created Successfully',
             })
         }catch(err){
             console.log(err);

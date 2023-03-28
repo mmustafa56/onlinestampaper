@@ -38,6 +38,7 @@ module.exports = {
                     message:'UID already exist'
                 })
             }else{
+
                 //created successfully
                 req.body.password = bcrypt.hashSync(req.body.password, salt)
                 const newuser = new User(req.body)
@@ -81,14 +82,23 @@ module.exports = {
             if(user){
                 const isPsswordcorrect = bcrypt.compareSync(req.body.password, user.password)
                 if(isPsswordcorrect){
-                    const UserData = user.toObject()
-                    delete UserData.password
-                    const token = jwt.sign(UserData,jwtKey)
-                    return res.json({
-                        success:true,
-                        message:'Successfully LogIn',
-                        token
+
+                    if(user.verify){
+                        const UserData = user.toObject()
+                        delete UserData.password
+                        const token = jwt.sign(UserData,jwtKey)
+                        return res.json({
+                            success:true,
+                            message:'Successfully LogIn',
+                            token
+                        })
+                    }
+
+                    return res.status(401).json({
+                        success:false,
+                        message:'User Is Unverifed'
                     })
+                    
                 }else{
                     return res.status(400).json({
                         success:false,
