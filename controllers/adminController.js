@@ -36,17 +36,23 @@ const addAdmin = async(req,res) =>{
 
 }
 
+
+//get all admin 
 const getAllAdmin =async (req,res) =>{
      const allAdmin = await AdminRegistration.find({})
      res.send(allAdmin)
 }
 
+
+//delete admin by id
 const deleteAdmin = async(req,res) =>{
     // const {idNumber,firstName,lastName,licenceNo,contact,city,dateOfBirth,persAddress,permAddress}=req.body;
     // res.send(`${idNumber} is successfully registered.`)
 
 }
 
+
+//
 const updateAdmin = (req,res) =>{
     // const {idNumber,firstName,lastName,licenceNo,contact,city,dateOfBirth,persAddress,permAddress}=req.body;
     // res.send(`${idNumber} is successfully registered.`)

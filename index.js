@@ -4,16 +4,11 @@ const adminRoute = require('./routes/admin');
 const userRoute = require('./routes/user');
 const cors = require('cors');
 require('dotenv/config');
-const mongoose = require('mongoose');
+const Db_connection = require("./config/dbConnection");
 
 const PORT = process.env.PORT || 5000;
+Db_connection();
 
-mongoose.connect(`mongodb+srv://mustafa1:mustafa1@realexample.frcboi4.mongodb.net/?retryWrites=true&w=majority/test`)
-               .then(()=> {
-                    console.log('Connected to the database ')
-                }).catch( (err) => {
-                        console.error(`Error connecting to the database. n${err}`);
-                })
 const app = express();
 const corsOption = {
                 exposeHeaders:['token'],
