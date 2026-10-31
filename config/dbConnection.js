@@ -2,7 +2,7 @@
 const mongoose =require("mongoose");
 
 async function Db_connection() {
-  await  mongoose.connect(`mongodb+srv://mustafa1:mustafa1@realexample.frcboi4.mongodb.net/?retryWrites=true&w=majority&appName=RealExample`)
+  await  mongoose.connect(process.env.MONGO_URI)
                .then(()=> {
                     console.log('Connected to the database ')
                 }).catch( (err) => {
